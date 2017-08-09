@@ -1,0 +1,871 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>小学生星级识字卡</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-title" content="小学生星级识字卡">
+		<link rel="apple-touch-icon" href="icon.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="icon.png">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<!-- UC强制全屏 -->
+		<meta name="full-screen" content="yes">
+		<!-- QQ强制全屏 -->
+		<meta name="x5-fullscreen" content="true">
+		<!-- UC应用模式 -->
+		<meta name="browsermode" content="application">
+		<meta name="msapplication-TileColor" content="#000" />
+		<!-- Windows 8 磁贴颜色 -->
+		<meta name="msapplication-TileImage" content="icon.png" />
+		<!-- Windows 8 磁贴图标 -->
+		<link rel="shortcut icon" href="icon.png">
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/words.js"></script>
+		<script type="text/javascript" src='xunfei/js/fingerprint2.min.js'></script>
+	    <script type="text/javascript" src="xunfei/js/iat.all.js"></script> 
+		<style type="text/css">
+						* {
+					margin:0px;
+					padding:0px;
+				}
+				html,body {
+					width:100%;
+					height:100%;
+				}
+				iframe {
+					border:0;
+				}
+				input {
+					ime-mode:disabled;
+				}
+				/* 屏蔽输入法 */ *,ui-title {
+					font-family:Microsoft YaHei;
+				}
+				* {
+					-webkit-touch-callout:none;
+					-webkit-user-select:none;
+					-khtml-user-select:none;
+					-moz-user-select:none;
+					-ms-user-select:none;
+					user-select:none;
+				}
+				#wordPan:after {
+					display:inline-block;
+					width:0;
+					height:100%;
+					vertical-align:middle;
+					content:"";
+				}
+				#wordPan:befor {
+					display:inline-block;
+					width:0;
+					height:100%;
+					vertical-align:middle;
+					content:"";
+				}
+				#wordPan {
+					font-size:40px;
+					margin:0px;
+					padding:0px;
+					margin:0px;
+					width:90%;
+					height:100%;
+					line-height:initial;
+					-webkit-text-size-adjust:auto !important;
+					font-family:Microsoft YaHei;
+					-webkit-transition:font-size 0.2s ease-out;
+				}
+				@media only screen and (max-height:1200px) {
+					#wordPan {
+					font-size:39px;
+				}
+				}@media only screen and (max-height:1100px) {
+					#wordPan {
+					font-size:38px;
+				}
+				}@media only screen and (max-height:1000px) {
+					#wordPan {
+					font-size:37px;
+				}
+				}@media only screen and (max-height:900px) {
+					#wordPan {
+					font-size:36px;
+				}
+				}@media only screen and (max-height:800px) {
+					#wordPan {
+					font-size:35px;
+				}
+				}@media only screen and (max-height:700px) {
+					#wordPan {
+					font-size:34px;
+				}
+				}@media only screen and (max-height:600px) {
+					#wordPan {
+					font-size:33px;
+				}
+				}@media only screen and (max-height:500px) {
+					#wordPan {
+					font-size:32px;
+				}
+				}@media only screen and (max-height:400px) {
+					#wordPan {
+					font-size:31px;
+				}
+				}@media only screen and (max-height:360px) {
+					#wordPan {
+					font-size:20px;
+				}
+				}.ui-listview>li>a {
+					background-image:url(css/images/GreenBack.png);
+					background-repeat:no-repeat;
+					background-size:0%;
+				}
+				.ui-slider-track {
+					margin:0 15px 0 15px;
+				}
+				#divMain .ui-block-b .ui-slider .ui-slider-handle {
+					width:40px;
+				}
+				.listviewUl {
+					top:6px;
+					width:100%;
+					position:absolute;
+					left:15px;
+					border:solid 1px #e8e8e8;
+					z-index:9999;
+					height:100%;
+					background:white;
+				}
+				div.ui-slider-switch {
+					width:110px;
+				}
+				#a {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: rgb(60, 135, 235);
+					border-radius: 20px;
+					height: 80px;
+					width: 450px;
+					margin: auto;
+					max-width: 96%;
+					text-align: center;
+					overflow: hidden;
+					color: #ffffff;
+				}
+		</style>
+	</head>
+	<body>
+		<div data-role="header" data-theme="b" data-position="fixed">
+			<h1 class="ui-title" role="heading">小学生星级识字卡</h1></div>
+		<div class="ui-grid-b">
+			<div class="ui-block-a" style="width: 70%; text-align: center;">
+				<div id="collapsible-select" data-role="collapsible" data-collapsed="true" style="width: 95%;    margin: 5px auto;">
+					<h4>选择星级</h4>
+					<ul data-role="listview" class="listviewUl">
+						<li>
+							<a href="javascript:;">0识字前测☆☆☆☆☆☆☆☆☆☆</a></li>
+						<li>
+							<a href="javascript:;">1星级★☆☆☆☆☆☆☆☆☆</a></li>
+						<li>
+							<a href="javascript:;">2星级★★☆☆☆☆☆☆☆☆</a></li>
+						<li>
+							<a href="javascript:;">3星级★★★☆☆☆☆☆☆☆</a></li>
+						<li>
+							<a href="javascript:;">4星级★★★★☆☆☆☆☆☆</a></li>
+						<li>
+							<a href="javascript:;">5星级★★★★★☆☆☆☆☆</a></li>
+						<li>
+							<a href="javascript:;">6星级★★★★★★☆☆☆☆</a></li>
+						<li>
+							<a href="javascript:;">7星级★★★★★★★☆☆☆</a></li>
+						<li>
+							<a href="javascript:;">8星级★★★★★★★★☆☆</a></li>
+						<li>
+							<a href="javascript:;">9星级★★★★★★★★★☆</a></li>
+						<li>
+							<a href="javascript:;">10星级★★★★★★★★★★</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="ui-block-b" style="width: 30%; text-align: center;">
+				<select name="flip" id="flip" data-role="slider" data-theme="a">
+					<option value="no">拼音关</option>
+					<option value="yes">拼音开</option></select>
+			</div>
+		</div>
+		<div class="ui-grid-b" id="divMain">
+			<div class="ui-block-a" style="width: 30%; text-align: center;">
+				<select name="flipLearned" id="flipLearned" data-role="slider" data-theme="a">
+					<option value="no">未学会</option>
+					<option value="yes">学会了</option></select>
+			</div>
+			<div class="ui-block-b" style="width: 40%; text-align: center;">
+				<input type="range" name="slider-s" id="slider-s" value="25" min="1" max="100" step="1" data-highlight="true" class="ime-disabled" onfocus=" this.style.imeMode='disabled'" focus="false" readonly onfocus="this.blur();" style="display:none;"></div>
+			<div class="ui-block-c" style="width: 30%; text-align: center;">
+				<select name="flipWords" id="flipWords" data-role="slider" data-theme="a">
+					<option value="no">学习全部</option>
+					<option value="yes">只学生词</option></select>
+			</div>
+		</div>
+		<div style="position: absolute!important; min-height: 50px; top: 150px!important; height: auto!important; position: relative; top: -150px; height: 100%; bottom: 100px; width: 100%; background-color: #f9f9f9; text-align: center; overflow: visible;">
+			<a id="wordPan" href="javascript:;" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">好人</a>
+			<div data-role="popup" id="popupVideo" data-position-to="window" data-dismissible="false" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content" style="padding-top: -30px;" data-transition="flip">
+				<a href="javascript:;" data-rel="back" data-role="button" data-theme="e" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div style="width: 100%; max-height: 300px; -webkit-overflow-scrolling: touch; overflow: auto;">
+					<iframe id="iframeBdHy" src="" width="90%;" height="90%" seamless hspeace="0 " vspace="0 " frameborder="0 "></iframe>
+				</div>
+			</div>
+			<div data-role="popup" id="popupRead" data-position-to="window" data-dismissible="false" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content" style="padding-top: -30px;" data-transition="flip">
+				<a href="javascript:;" data-rel="back" data-role="button" data-theme="e" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div style="width: 100%; max-height: 300px; -webkit-overflow-scrolling: touch; overflow: auto;">
+					 <h2 id='iat_result' style="text-align: center;    margin: 30px;">准备朗读</h2>	
+					<div style="position:relative">
+						<div id='a'>点击开始录音</div>
+						<div id="canvas_wrapper" style="display:none">
+							<div style="display: inline"></div>
+							<canvas id="volume" height="4"></canvas>
+						</div>
+						<div style="
+    text-align: center;
+    margin: 5px;
+">语音技术由科大讯飞提供</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<p>
+		</div>
+		<div data-role="footer" data-position="fixed" style="background-color: #f9f9f9; border: 0px;">
+			<fieldset id="footerTool" class="ui-grid-b" style="margin: 10px 20px;">
+				<div class="ui-block-a">
+					<button class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-shadow ui-corner-all ui-btn-b" style="width: 95%; margin: auto;">上一个</button></div>
+				<div class="ui-block-b">
+					<button class="ui-btn ui-icon-recycle ui-btn-icon-left ui-shadow ui-corner-all " style="width: 95%; margin: auto;">随机</button></div>
+				<div class="ui-block-c">
+					<button class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b" style="width: 95%; margin: auto;">下一个</button></div>
+			</fieldset>
+			<div style="height: 40px; width: 100%; background-color: #000; color: #fff;text-shadow: 0 0px 0 #f3f3f3;">
+				<h1 class="ui-title" role="heading">Copyright © Jackie</h1></div>
+		</div>
+		<div id="voice"></div>
+		<script type="text/javascript">		
+			var starIndex = 0;
+			var words = "";
+			var sltWordIndex = 0;
+			var sltWordsLength = 0;
+			var sltWord = "";
+			var wordArry = null;
+			var pingyinArry = null;
+			var showPinyin = false;
+			var wordLearned = [];
+			var studyOnly = false;
+			var studyWordFoward = true;
+			var openRecord=false;
+
+			var LL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+			var words0, words1, words2, words3, words4, words5, words6, words7, words8, words9, words10;
+			var pingyin0, pingyin1, pingyin2, pingyin3, pingyin4, pingyin5, pingyin6, pingyin7, pingyin8, pingyin9, pingyin10;
+
+			$(document).ready(function() {
+
+				starIndex = localStorage.getItem('starIndex') ? parseInt(localStorage.getItem('starIndex')) : 1;
+				sltWordIndex = localStorage.getItem('sltWordIndex') ? parseInt(localStorage.getItem('sltWordIndex')) : 0;
+				if (localStorage.getItem('wordLearned')) {
+					wordLearned = localStorage.getItem('wordLearned').split(",");
+				}
+
+				initWords(starIndex);
+				$(".ui-title").css("margin", "0 10%");
+
+				$("#divMain .ui-block-b .ui-slider .ui-slider-handle").text(sltWordIndex + 1);
+				$("#slider-s").prop("max", sltWordsLength).slider("refresh");;
+				$("#slider-s").val(sltWordIndex + 1).slider("refresh");
+				$("#slider-s").slider({
+					stop: function(event, ui) {
+						sltWordIndex = $(this).val() - 1;
+						$("#divMain .ui-block-b .ui-slider .ui-slider-handle").text(sltWordIndex + 1);
+						ShowWord();
+					}
+				});
+				showLearnedProcess();
+			});
+
+			$('#collapsible-select').on("collapsibleexpand",
+			function(event, ui) {
+				//alert();
+			});
+
+			$("#footerTool .ui-block-c").on("tap",
+			function() {
+
+				if (sltWordIndex >= (sltWordsLength - 1)) {
+					layer.msg('到头了！', {
+						time: 500,
+						icon: 5
+					});
+					return false;
+				}
+				studyWordFoward = true;
+				//下一个
+				if (sltWordIndex < sltWordsLength - 1) {
+					sltWordIndex++;
+					ShowWord();
+
+					$("#divMain .ui-block-b .ui-slider .ui-slider-handle").text(sltWordIndex + 1);
+					$("#slider-s").prop("max", sltWordsLength).slider("refresh");;
+					$("#slider-s").val(sltWordIndex + 1).slider("refresh");
+				}
+
+			});
+			$("#footerTool  .ui-block-c").on("taphold",
+			function() {
+				//alert("You taphold this!");
+				sltWordIndex = sltWordsLength - 1;
+				ShowWord();
+
+				$("#divMain .ui-block-b .ui-slider .ui-slider-handle").text(sltWordIndex + 1);
+				$("#slider-s").prop("max", sltWordsLength).slider("refresh");;
+				$("#slider-s").val(sltWordIndex + 1).slider("refresh");
+			});
+			$("#footerTool .ui-block-a").on("tap",
+			function() {
+
+				if (sltWordIndex <= 0) {
+
+					layer.msg('到头了！', {
+						time: 500,
+						icon: 5
+					});
+					//return false;
+				}
+				studyWordFoward = false;
+				//前一个
+				if (sltWordIndex > 0) {
+					sltWordIndex--;
+					ShowWord();
+
+					$("#divMain .ui-block-b .ui-slider .ui-slider-handle").text(sltWordIndex + 1);
+					$("#slider-s").prop("max", sltWordsLength).slider("refresh");;
+					$("#slider-s").val(sltWordIndex + 1).slider("refresh");
+				}
+
+			});
+			$("#footerTool  .ui-block-a").on("taphold",
+			function() {
+				//alert("You taphold this!");
+				sltWordIndex = 0;
+				ShowWord();
+
+				$("#divMain .ui-block-b .ui-slider .ui-slider-handle").text(sltWordIndex + 1);
+				$("#slider-s").prop("max", sltWordsLength).slider("refresh");;
+				$("#slider-s").val(sltWordIndex + 1).slider("refresh");
+			});
+
+			$("#footerTool  .ui-block-b").on("tap",
+			function() {
+
+				//随机一个
+				sltWordIndex = parseInt(sltWordsLength * Math.random()) ;
+			
+
+				if(studyOnly)
+				{
+					var tempWordIndexArry=[];	
+					for (var i = 0; i < sltWordsLength; i++) {						 
+							if (!wordLearned.contains(wordArry[i])) 
+							{
+								tempWordIndexArry.push(i);
+							}
+					}
+
+					var tempIndex = parseInt(tempWordIndexArry.length * Math.random()) ;
+
+					sltWordIndex=parseInt(tempWordIndexArry[tempIndex]);
+				}
+				ShowWord();
+				$("#divMain .ui-block-b .ui-slider .ui-slider-handle").text(sltWordIndex + 1);
+				$("#slider-s").prop("max", sltWordsLength).slider("refresh");;
+				$("#slider-s").val(sltWordIndex + 1).slider("refresh");
+
+			});
+			$('#collapsible-select>ul>li').each(function(index) {
+				$(this).on("tap",
+				function(e) {
+
+					starIndex = index;
+					sltWordIndex = 0;
+					initWords(starIndex);
+
+					$("#divMain .ui-block-b .ui-slider .ui-slider-handle").text(sltWordIndex + 1);
+					$("#slider-s").prop("max", sltWordsLength).slider("refresh");;
+					$("#slider-s").val(sltWordIndex + 1).slider("refresh");
+					$('#collapsible-select').collapsible("option", "collapsed", true);
+					e.stopPropagation();
+					e.preventDefault();
+					return false;
+
+				});
+			});
+
+			function initWords(starIndex) {
+				words = eval("words" + starIndex);
+				//sltWordIndex=0;
+				sltWord = "";
+				wordArry = words.split(" ");
+				if (eval("pingyin" + starIndex)) {
+					pingyinArry = (eval("pingyin" + starIndex)).split(" ");
+				} else {
+					pingyinArry = null;
+				}
+				sltWordsLength = wordArry.length;
+				$(".ui-title").eq(0).text("小学生星级识字卡  " + starIndex + " 星级（共" + LL[starIndex] + "/" + sltWordsLength + "个词）");
+				ShowWord();
+
+				localStorage.setItem('starIndex', starIndex);
+				//alert(words)
+			}
+
+			function ShowWord() {
+
+				if (sltWordIndex < 0 || sltWordIndex > sltWordsLength - 1) {
+					return false;
+				}
+
+				var tempSltWordIndex = sltWordIndex;
+				if (studyOnly && wordLearned.contains(wordArry[tempSltWordIndex])) {
+
+					if (studyWordFoward) {
+
+						for (var i = tempSltWordIndex; i < sltWordsLength - 1; i++) {
+							if (!wordLearned.contains(wordArry[i])) {
+								sltWordIndex = i;
+								break;
+							}
+						}
+						if (tempSltWordIndex == sltWordIndex) {
+							sltWordIndex = sltWordIndex - 1;
+							layer.msg('到头了！', {
+								time: 500,
+								icon: 5
+							});
+
+						}
+
+					} else {
+
+						for (var i = tempSltWordIndex; i > 1; i--) {
+							if (!wordLearned.contains(wordArry[i])) {
+								sltWordIndex = i;
+								break;
+							}
+						}
+						if (tempSltWordIndex == sltWordIndex) {
+							sltWordIndex = sltWordIndex + 1;
+							layer.msg('到头了！', {
+								time: 500,
+								icon: 5
+							});
+						}
+					}
+
+				}
+
+				sltWord = wordArry[sltWordIndex];
+				if (wordLearned.contains(sltWord)) {
+					var myswitch = $("#flipLearned");
+					myswitch[0].selectedIndex = 1;
+					myswitch.slider("refresh");
+					$('#flipLearned').val('yes');
+				} else {
+					var myswitch = $("#flipLearned");
+					myswitch[0].selectedIndex = 0;
+					myswitch.slider("refresh");
+				}
+				var wdStr = "";
+
+				if (showPinyin) {
+					if (pingyinArry != null && sltWordIndex <= sltWordsLength) {
+						wdStr = pingyinArry[sltWordIndex] + "<br>" + sltWord;
+						ReadWord();
+					} else {
+						wdStr = "NA" + "<br>" + sltWord;
+					}
+				} else {
+					wdStr = sltWord;
+				}
+
+				$("#wordPan").html(wdStr).on("tap",
+				function(e) {
+					var url = "http://hanyu.baidu.com/s?wd=" + sltWord;
+
+					$("#iframeBdHy").attr("src", url);
+					$("#popupVideo").popup({
+						history: false
+					}).popup('open');
+					$("#iframeBdHy").blur();
+					e.stopPropagation();
+					e.preventDefault();
+					return false;
+				});
+				$("#wordPan").html(wdStr).on("taphold",
+				function(e) {
+					 
+					$("#popupRead").popup({
+						history: false
+					}).popup('open');		
+					$("#iat_result").text("");
+					if(!openRecord)
+					{
+						openRecord=true;
+					var iflytek = (function(document){
+						var iat_result = document.getElementById('iat_result');
+						var tip = document.getElementById('a');
+						var volumeTip = document.getElementById('volume');
+						var volumeWrapper = document.getElementById('canvas_wrapper');
+						var oldText = document.getElementById('a').innerHTML;
+						/* 标识麦克风按钮状态，按下状态值为true，否则为false */
+						var mic_pressed = false;
+						var volumeEvent = (function () {
+							var lastVolume = 0;
+							var eventId = 0;
+							var canvas = volumeTip,
+								cwidth = canvas.width,
+								cheight = canvas.height;
+							var ctx = canvas.getContext('2d');
+							var gradient = ctx.createLinearGradient(0, 0, cwidth, 0);
+							var animationId;
+							gradient.addColorStop(1, 'red');
+							gradient.addColorStop(0.8, 'yellow');
+							gradient.addColorStop(0.5, '#9ec5f5');
+							gradient.addColorStop(0, '#c1f1c5');
+
+							volumeWrapper.style.display = "none";
+
+							var listen = function(volume){
+								lastVolume = volume;
+							};
+							var draw = function(){
+								if(volumeWrapper.style.display == "none"){
+									cancelAnimationFrame(animationId);
+								}
+								ctx.clearRect(0, 0, cwidth, cheight);
+								ctx.fillStyle = gradient;
+								ctx.fillRect(0, 0, 1 + lastVolume*cwidth/30, cheight);
+								animationId = requestAnimationFrame(draw);
+							};
+							var start = function(){
+								animationId = requestAnimationFrame(draw);
+								volumeWrapper.style.display = "block";
+							};
+							var stop = function(){
+								clearInterval(eventId);
+								volumeWrapper.style.display = "none";
+							};
+							return {
+								"listen":listen,
+								"start":start,
+								"stop":stop
+							};
+						})();
+						/***********************************************local Variables**********************************************************/
+
+						/**
+						 * 初始化Session会话
+						 */
+						var session = new IFlyIatSession({
+							"callback":{
+								"onResult": function (err, result) {
+									/* 若回调的err为空或错误码为0，则会话成功，可提取识别结果进行显示*/
+									if (err == null || err == undefined || err == 0) {
+										if (result == '' || result == null)
+										{
+											iat_result.innerHTML = "没有获取到识别结果";
+										}
+										else
+										{
+										result=	result.substr(0,result.length-1);
+											iat_result.innerHTML = result;
+											//$("#popupRead").popup('close');		
+											if(result==sltWord)
+											{ 
+												layer.msg('恭喜你，读对了！', {
+																time: 500,
+																icon: 6
+															});
+											}
+											else
+											{
+											  layer.msg('很遗憾，读错了！', {
+																time: 500,
+																icon: 5
+															});
+											}
+
+										}
+										/* 若回调的err不为空且错误码不为0，则会话失败，可提取错误码 */
+									} else {
+										iat_result.innerHTML = 'error code : ' + err + ", error description : " + result;
+									}
+									mic_pressed = false;
+									volumeEvent.stop();
+								},
+								"onVolume": function (volume) {
+									volumeEvent.listen(volume);
+								},
+								"onError":function(){
+									mic_pressed = false;
+									volumeEvent.stop();
+								},
+								"onProcess":function(status){
+									switch (status){
+										case 'onStart':
+											tip.innerHTML = "服务初始化...";
+											break;
+										case 'normalVolume':
+										case 'started':
+											tip.innerHTML = "倾听中...";
+											break;
+										case 'onStop':
+											tip.innerHTML = "等待结果...";
+											break;
+										case 'onEnd':
+											tip.innerHTML = oldText;
+											break;
+										case 'lowVolume':
+											tip.innerHTML = "倾听中...(声音过小)";
+											break;
+										default:
+											tip.innerHTML = status;
+									}
+								}
+							}
+						});
+
+						if(!session.isSupport()){
+							tip.innerHTML = "当前浏览器不支持！";
+							return;
+						}
+
+						var play = function() {
+							if (!mic_pressed) {
+								var ssb_param = {
+									"grammar_list": null,
+									"params": "appid=58a67342,appidkey=06df7e9b07168315, lang = sms, acous = anhui, aue=speex-wb;-1, usr = mkchen, ssm = 1, sub = iat, net_type = wifi, rse = utf8, ent =sms16k, rst = plain, auf  = audio/L16;rate=16000, vad_enable = 1, vad_timeout = 5000, vad_speech_tail = 500, compress = igzip"
+								};
+								iat_result.innerHTML = '   ';
+								/* 调用开始录音接口，通过function(volume)和function(err, obj)回调音量和识别结果 */
+								session.start(ssb_param);
+								mic_pressed = true;
+								volumeEvent.start();
+							}
+							else {
+								//停止麦克风录音，仍会返回已传录音的识别结果.
+								session.stop();
+							}
+						}
+
+						/**
+						 * 取消本次会话识别
+						 */
+						var cancel = function() {
+							session.cancel();
+						}
+
+						tip.addEventListener("click",function(){
+							play();
+						});
+						//页面不可见，断开麦克风调用
+						document.addEventListener("visibilitychange",function(){
+							if(document.hidden == true){
+								session.kill();
+							}
+						});
+					})(document)
+					}
+				});
+				localStorage.setItem('sltWordIndex', sltWordIndex);
+
+				$("#divMain .ui-block-b .ui-slider .ui-slider-handle").text(sltWordIndex + 1);
+				$("#slider-s").prop("max", sltWordsLength).slider("refresh");;
+				$("#slider-s").val(sltWordIndex + 1).slider("refresh");
+			}
+			$('#flipWords').change(function() {
+				var myswitchWords = $(this);
+				studyOnly = myswitchWords[0].selectedIndex == 1 ? true: false;
+			}) ;
+			$('#flip').change(function() {
+				var myswitch = $(this);
+				showPinyin = myswitch[0].selectedIndex == 1 ? true: false;
+				ShowWord();
+			});
+			$('#flipLearned').change(function() {
+				var myswitchLearned = $(this);
+				var learned = myswitchLearned[0].selectedIndex == 1 ? true: false;
+				if (learned) {
+					if (!wordLearned.contains(sltWord)) {
+						wordLearned.push(sltWord);
+						layer.msg('恭喜你又学会了一个生词！', {
+							time: 500,
+							icon: 6
+						});
+					}
+				} else {
+					if (wordLearned.contains(sltWord)) {
+						wordLearned.remove(sltWord);
+						layer.msg('这个生词还没学会，继续加油！', {
+							time: 500,
+							icon: 5
+						});
+					}
+				}
+				localStorage.setItem('wordLearned', wordLearned);
+				showLearnedProcess();
+			});
+			$(document).on("swipeleft",
+			function() {
+				//alert("You swiped left!");
+				$("#footerTool  .ui-block-a").trigger("tap");
+			});
+			$(document).on("swiperight",
+			function() {
+				//alert("You swiped right!");
+				$("#footerTool  .ui-block-c").trigger("tap");
+			});
+
+			$(document).ready(function() {
+
+				// 此处是 jQuery 事件...
+			});
+
+			$(document).on("tap",
+			function() {
+				//alert("You tap this!");
+				// e.stopPropagation();
+			});
+
+			$(document).on("taphold",
+			function() {
+				//alert("You taphold this!");
+			});
+
+			$("div").on("p", "tap",
+			function(e) {
+				e.stopPropagation(); // 阻止JavaScript事件冒泡传递
+			});
+
+			// popup examples
+			$(document).on("pagecreate",
+			function() {
+				// The window width and height are decreased by 30 to take the tolerance of 15 pixels at each side into account
+				function scale(width, height, padding, border) {
+					var scrWidth = $(window).width() - 30,
+					            scrHeight = $(window).height() - 30,
+					            ifrPadding = 2 * padding,
+					            ifrBorder = 2 * border,
+					            ifrWidth = width + ifrPadding + ifrBorder,
+					            ifrHeight = height + ifrPadding + ifrBorder,
+					            h,
+					w;
+					if (ifrWidth < scrWidth && ifrHeight < scrHeight) {
+						w = ifrWidth;
+						h = ifrHeight;
+					} else if ((ifrWidth / scrWidth) > (ifrHeight / scrHeight)) {
+						w = scrWidth;
+						h = (scrWidth / ifrWidth) * ifrHeight;
+					} else {
+						h = scrHeight;
+						w = (scrHeight / ifrHeight) * ifrWidth;
+					}
+					return {
+						'width': w - (ifrPadding + ifrBorder),
+						'height': h - (ifrPadding + ifrBorder)
+					};
+				};
+				$(".ui-popup iframe").attr("width", 0).attr("height", "auto");
+				$("#popupVideo").on({
+					popupbeforeposition: function() {
+						// call our custom function scale() to get the width and height
+						var size = scale(497, 298, 15, 1),
+						w = size.width,
+						h = size.height;
+						$("#popupVideo iframe").attr("width", w).attr("height", h);
+
+					},
+					popupafterclose: function() {
+						$("#popupVideo iframe").attr("width", 0).attr("height", 0);
+					}
+				});
+			});
+
+			function ReadWord() {
+				var zhText = sltWord;
+				zhText = encodeURI(zhText);
+				voiceUrl = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=2&text=" + zhText
+				var voiceHtml = "<audio autoplay=\"autoplay\">";
+				voiceHtml += "<source src=\"" + voiceUrl + "\" type=\"audio/mpeg\">";
+				voiceHtml += "<embed height=\"0\" width=\"0\" src=\"" + voiceUrl + "\">";
+				voiceHtml += "</audio>";
+
+				$("#voice").html("");
+				$("#voice").html(voiceHtml);
+			}
+
+			Array.prototype.indexOf = function(val) {
+				for (var i = 0; i < this.length; i++) {
+					if (this[i] == val) {
+						return i;
+					}
+				}
+				return - 1;
+			}
+			Array.prototype.remove = function(val) {
+				var index = this.indexOf(val);
+				if (index > -1) {
+					this.splice(index, 1);
+				}
+			}
+			Array.prototype.contains = function(needle) {
+				for (i in this) {
+					if (this[i] == needle) return true;
+				}
+				return false;
+			}
+
+			function showLearnedProcess() {
+
+				for (var i = 0; i <= 10; i++) {
+					var ws = eval("words" + i); //当前星期生词
+					//var LL=eval("LL" + i);//当前星级已经学会生词个数
+					var wArry = ws.split(" ");
+					var tt = wArry.length;
+					LL[i] = 0;
+					for (var j = 0; j < tt; j++) {
+
+						for (var k = 0; k < wordLearned.length; k++) {
+							if (wArry[j] == wordLearned[k]) {
+								LL[i]++;
+
+							}
+						}
+					}
+
+					var pp = Math.ceil(LL[i] * 100 / eval("words" + i).split(' ').length);
+					$($(".listviewUl>li>a")[i]).css("background-size", pp + "%");
+					$(".ui-title").eq(0).text("小学生星级识字卡  " + starIndex + " 星级（共" + LL[starIndex] + "/" + sltWordsLength + "个词）");
+				}
+
+			}
+		 
+			</script>
+	</body>
+
+</html>
